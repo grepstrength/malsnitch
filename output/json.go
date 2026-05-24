@@ -3,7 +3,7 @@ package output
 import (
 	"encoding/json" //Go's built in JSON marshaler
 	"os"
-	"github.com/grepstrength/not-so-secret/detector"
+	"github.com/grepstrength/malsnitch/detector"
 )
 
 type JSONOutput struct {

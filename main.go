@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/grepstrength/not-so-secret/engine"
-	"github.com/grepstrength/not-so-secret/output"
+	"github.com/grepstrength/malsnitch/engine"
+	"github.com/grepstrength/malsnitch/output"
 )
 
 func main() {

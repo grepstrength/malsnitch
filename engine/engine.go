@@ -1,8 +1,8 @@
 package engine
 
 import (
-	"github.com/grepstrength/not-so-secret/detector"
-	"github.com/grepstrength/not-so-secret/input"
+	"github.com/grepstrength/malsnitch/detector"
+	"github.com/grepstrength/malsnitch/input"
 )
 
 type Reader interface {
