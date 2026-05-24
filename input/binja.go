@@ -32,7 +32,7 @@ type BinjaReader struct {
 	report	BinjaReport
 }
 
-func NewBinjaReader(path string) (*BinjaReaer, error) {
+func NewBinjaReader(path string) (*BinjaReader, error) {
 	_, err := os.Stat(path)
 	if err != nil {
 		return nil, err
@@ -50,4 +50,14 @@ func NewBinjaReader(path string) (*BinjaReaer, error) {
 	}
 	
 	return &BinjaReader{path: path, report: report}, nil
+}
+
+func (b *BinjaReader) ReadLines() ([]string, error) {
+	var lines []string
+	for _, entry := range b.report.Strings {
+		if len(entry.Value) > 0 { //filters out empty strings
+			lines = append(lines, entry.Value)
+		}
+	}
+	return lines, nil
 }

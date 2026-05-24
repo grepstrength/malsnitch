@@ -15,7 +15,7 @@ func main() {
 	flag.Parse() //actually reads os.Args and populates all the registered flags... extremely important
 		
 	if *filePath == "" {
-		fmt.Println("Usage: not-so-secret -file <path> [-type text|floss]")
+		fmt.Println("Usage: malsnitch -file <path> [-type text|floss|binja]")
 		os.Exit(1)
 	}
 
@@ -27,6 +27,8 @@ func main() {
 		eng, err = engine.NewFromFile(*filePath)
 	case "floss":
 		eng, err = engine.NewFromFLOSS(*filePath)
+	case "binja":
+		eng, err = engine.NewFromBinja(*filePath)
 	default:
 		fmt.Fprintf(os.Stderr, "Unknown input type: %s\n", inputType)
 		os.Exit(1)

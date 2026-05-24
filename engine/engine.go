@@ -40,6 +40,18 @@ func NewFromFLOSS(filePath string) (*Engine, error) {
 	}, nil
 }
 
+func NewFromBinja(filePath string) (*Engine, error) {
+	reader, err := input.NewBinjaReader(filePath)
+	if err != nil {
+		return nil, err
+	}
+
+	return &Engine{
+		detectors: defaultDetectors(),
+		reader:    reader,
+	}, nil
+}
+
 func defaultDetectors() []detector.Detector {
 	return []detector.Detector{
 		detector.NewCryptoDetector(), //this is unexported
