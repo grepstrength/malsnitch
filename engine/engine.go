@@ -55,6 +55,7 @@ func NewFromBinja(filePath string) (*Engine, error) {
 func defaultDetectors() []detector.Detector {
 	return []detector.Detector{
 		detector.NewCryptoDetector(), //this is unexported
+		detector.NewC2Detector(),
 	}
 }
 
@@ -70,5 +71,7 @@ func (e *Engine) Run() ([]detector.Finding, error) {
 		results := d.Detect(lines)
 		findings = append(findings, results...) //avoids type mismatches
 	}
+	findings = dedup(findings) //runs first to collaps same-secret-same-line duplicates by confidence
+	findings = removeSubstrings(findings) //runs second to drop substring matches
 	return findings, nil
 }
