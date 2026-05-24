@@ -5,6 +5,10 @@ import (
 	"os" //needed for file system operations
 )
 
+type Reader interface {
+	ReadLines() ([]string, error)
+}
+
 type FileReader struct {
 	path string //only using one field is easier to scale than passing a string around
 }
