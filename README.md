@@ -9,11 +9,11 @@
 Look no further! 
 
 malsnitch is a CLI tool meant to assist RE workflows by scanning artifacts like string dumps, FLOSS output, or Binja exports. It extracts embedded secrets malware authors put in their binaries. 
-    - C2 creds
-    - crypto keys
-    - API tokens
-    - exfil channel configs
-    - more!
+- C2 creds
+- crypto keys
+- API tokens
+- exfil channel configs
+- more!
 
 TO BE CLEAR - this is not another developer secrets scanner. Tools like TruffleHog or Gitleaks catch API keys being committed to legitimate repos. malsnitch gets the RC4 key buried in `.rdata` or the SFTP password to a random C2 server.
 
@@ -29,7 +29,7 @@ TO BE CLEAR - this is not another developer secrets scanner. Tools like TruffleH
 - Structured JSON output to stdout
 - Supports multiple input formats:
     - `text`: raw strings dump (e.g. strings.exe or FLOSS raw output)
-    - `floss`: FLOSS JSON ouptut
+    - `floss`: FLOSS JSON output
     - `binja`: Binary Ninja export JSON (via the included `bn_export.py`)
 
 ## Usage
@@ -71,13 +71,17 @@ go build -o malsnitch.exe .
 .\malsnitch.exe -file sample_strings.txt > results.json
 ```
 
+### Example Output
+
+![alt text](image.png)
+
 ## Binary Ninja Plugin
 
 A python export script is included in `scripts/bn_export.py`. You can run this inside Binja's script console or headless:
 ```bash
 python bn_export.py sample.exe output.json
 ```
-This produces the JSON format that malsnitch conumes with `-type binja`.
+This produces the JSON format that malsnitch consumes with `-type binja`.
 
 ## Exit Codes
 
@@ -86,6 +90,17 @@ This produces the JSON format that malsnitch conumes with `-type binja`.
 | 0    | Secrets found |
 | 1    | Error (bad input, missing file, etc.) |
 | 2    | Clean scan, no secrets detected |
+
+## Future Roadmap
+
+### Sooner
+1. API key detector
+2. CSV output
+
+### Later
+1. Memory dump scanner
+2. PCAP input
+3. MITRE ATT&CK mapping
 
 ## License
 
