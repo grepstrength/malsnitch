@@ -56,6 +56,7 @@ func defaultDetectors() []detector.Detector {
 	return []detector.Detector{
 		detector.NewCryptoDetector(), //this is unexported
 		detector.NewC2Detector(),
+		detector.NewAPIKeyDetector(),
 	}
 }
 
