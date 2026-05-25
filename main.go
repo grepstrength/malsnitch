@@ -15,6 +15,7 @@ func main() {
 	filePath := flag.String("file", "", "path to input file") //registers a flag called -file, and the three arguments are flag name, default value, ad help text
 	inputType := flag.String("type", "text", "input type: text, floss, or binja")
 	showVersion := flag.Bool("version", false, "print version and exit")
+	outputFormat := flag.String("output", "json", "output format: json or csv")
 	flag.Usage = func() { //overrides the default help output
 		fmt.Fprintf(os.Stderr, "malsnitch v%s\n", version)
 		fmt.Fprintf(os.Stderr, "Malware secrets scanner — extracts embedded credentials, crypto keys, and C2 artifacts\n\n")
@@ -25,6 +26,9 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  floss   FLOSS JSON output (floss -j sample.exe)\n")
 		fmt.Fprintf(os.Stderr, "  binja   Binary Ninja export JSON (bn_export.py)\n\n")
 		fmt.Fprintf(os.Stderr, "Flags:\n")
+		fmt.Fprintf(os.Stderr, "\nOutput formats:\n")
+		fmt.Fprintf(os.Stderr, "  json   Structured JSON (default)\n")
+		fmt.Fprintf(os.Stderr, "  csv    Comma-separated values\n\n")
 		flag.PrintDefaults() //prins the auto-generated flag descriptions
 	}
 
@@ -67,7 +71,16 @@ func main() {
 		fmt.Fprintln(os.Stderr, "No secrets detected.")
 		os.Exit(2) //clean scan with no findings
 	}
-	fmt.Fprintf(os.Stderr, "Found %d potential secret(s)\n\n", len(findings))  //constructor and method call in one line
-	output.NewJSONOutput(findings).Print()
-	os.Exit(0)
+	fmt.Fprintf(os.Stderr, "Found %d potential secret(s)\n\n", len(findings))
+
+		switch *outputFormat {
+		case "json":
+			output.NewJSONOutput(findings).Print()
+		case "csv":
+			output.NewCSVOutput(findings).Print()
+		default:
+			fmt.Fprintf(os.Stderr, "Unknown output format: %s\n", *outputFormat)
+			os.Exit(1)
+		}
+
 }

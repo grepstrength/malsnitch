@@ -94,8 +94,8 @@ This produces the JSON format that malsnitch consumes with `-type binja`.
 ## Future Roadmap
 
 ### Sooner
-1. API key detector
-2. CSV output
+1. ~~API key detector~~ DONE
+2. ~~CSV output~~ DONE
 
 ### Later
 1. Memory dump scanner
