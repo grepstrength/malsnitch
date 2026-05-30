@@ -15,7 +15,7 @@ malsnitch is a CLI tool meant to assist RE workflows by scanning artifacts like 
 - exfil channel configs
 - more!
 
-TO BE CLEAR - this is not another developer secrets scanner. Tools like TruffleHog or Gitleaks catch API keys being committed to legitimate repos. malsnitch gets the RC4 key buried in `.rdata` or the SFTP password to a random C2 server.
+TO BE CLEAR - this is not another developer secrets scanner. Tools like TruffleHog or Gitleaks catch API keys being committed to legitimate repos. malsnitch gets the RC4 key buried in `.rdata` or the SMTP password to a random C2 server.
 
 (Also, I'm proud of myself for not shoehorning in "Go" anywhere in the title.)
 
@@ -25,6 +25,8 @@ TO BE CLEAR - this is not another developer secrets scanner. Tools like TruffleH
 - Detects C2 infrastructure
 - Detects exfil channel creds (Discord webhooks, Telegram bot tokens)
 - Detects hardcoded credentials (SMTP, FTP, HTTP, etc)
+- Detects API keys (GitHub PATs, AWS, Stripe, Slack, SendGrid, Mailgun)
+- Memory dump scanner
 - Auto deduplication and substring suppression
 - Structured JSON output to stdout
 - Supports multiple input formats:
@@ -34,11 +36,17 @@ TO BE CLEAR - this is not another developer secrets scanner. Tools like TruffleH
 
 ## Usage
 
-1. Clone the repo:
+1. Clone the repo OR install the Go package:
 
 ```
 git clone https://github.com/grepstrength/malsnitch.git
 cd malsnitch
+```
+
+OR
+
+```
+go install github.com/grepstrength/malsnitch@latest
 ```
 
 2. Build:
@@ -65,13 +73,36 @@ go build -o malsnitch.exe .
 .\malsnitch.exe -file bn_export.json -type binja
 ```
 
-6. Pipe JSON output to a file:
+6. Run against a memory dump:
 
 ```
-.\malsnitch.exe -file sample_strings.txt > results.json
+.\malsnitch.exe -file memdump.bin -type memdump
 ```
 
-### Example Output
+7. Pipe JSON output to a file:
+
+```
+.\malsnitch.exe -file sample_strings.txt > <FILENAME>.json
+```
+
+8. Save the results to a CSV:
+
+```
+.\malsnitch.exe -file sample_strings.txt -type text -output csv > <FILENAME>.csv
+```
+
+## Examples
+
+### Try It Yourself
+
+```
+.\malsnitch.exe -file examples\test_strings.txt -type text
+.\malsnitch.exe -file examples\test_binja.json -type binja
+.\malsnitch.exe -file examples\test_floss.json -type floss
+.\malsnitch.exe -file examples\test_memdump.bin -type memdump
+```
+
+### Output
 
 ![alt text](image.png)
 
@@ -93,14 +124,8 @@ This produces the JSON format that malsnitch consumes with `-type binja`.
 
 ## Future Roadmap
 
-### Sooner
-1. ~~API key detector~~ DONE
-2. ~~CSV output~~ DONE
-
-### Later
-1. Memory dump scanner
-2. PCAP input
-3. MITRE ATT&CK mapping
+1. PCAP input
+2. MITRE ATT&CK mapping
 
 ## License
 

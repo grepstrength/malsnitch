@@ -52,11 +52,23 @@ func NewFromBinja(filePath string) (*Engine, error) {
 	}, nil
 }
 
+
+ func NewFromMemDump(filePath string) (*Engine, error) {
+	reader, err := input.NewMemDumpReader(filePath)
+	if err != nil {
+		return nil, err
+	}
+	return &Engine{
+		detectors: defaultDetectors(),
+		reader:	reader,
+	}, nil
+ }
 func defaultDetectors() []detector.Detector {
 	return []detector.Detector{
 		detector.NewCryptoDetector(), //this is unexported
 		detector.NewC2Detector(),
 		detector.NewAPIKeyDetector(),
+		detector.NewBinaryDetector(),
 	}
 }
 
@@ -72,7 +84,16 @@ func (e *Engine) Run() ([]detector.Finding, error) {
 		results := d.Detect(lines)
 		findings = append(findings, results...) //avoids type mismatches
 	}
+	if memReader, ok := e.reader.(*input.MemDumpReader); ok { 
+		for _, d := range e.detectors {
+			if bd, ok := d.(*detector.BinaryDetector); ok {
+				results := bd.DetectBytes(memReader.RawBytes())
+				findings = append(findings, results...)
+			}
+		}
+	}
 	findings = dedup(findings) //runs first to collaps same-secret-same-line duplicates by confidence
 	findings = removeSubstrings(findings) //runs second to drop substring matches
 	return findings, nil
+
 }

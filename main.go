@@ -53,6 +53,8 @@ func main() {
 		eng, err = engine.NewFromFLOSS(*filePath)
 	case "binja":
 		eng, err = engine.NewFromBinja(*filePath)
+	case "memdump":
+		eng, err = engine.NewFromMemDump(*filePath)
 	default:
 		fmt.Fprintf(os.Stderr, "Unknown input type: %s\n", *inputType)
 		os.Exit(1)
