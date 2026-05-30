@@ -1,0 +1,27 @@
+{
+  "strings": {
+    "static_strings": [
+      {"string": "kernel32.dll", "offset": 4096, "encoding": "ASCII"},
+      {"string": "VirtualAlloc", "offset": 4120, "encoding": "ASCII"},
+      {"string": "GetProcAddress", "offset": 4140, "encoding": "ASCII"},
+      {"string": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)", "offset": 8200, "encoding": "ASCII"},
+      {"string": "Content-Type: application/x-www-form-urlencoded", "offset": 8300, "encoding": "ASCII"}
+    ],
+    "decoded_strings": [
+      {"string": "http://notgoclaw.htb:8443/gate.php", "offset": 0, "encoding": "UTF-8", "decoding_routine": "0x00401a3c"},
+      {"string": "9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d", "offset": 0, "encoding": "UTF-8", "decoding_routine": "0x00401a3c"},
+      {"string": "N0tS0Cl@wful_2026!", "offset": 0, "encoding": "UTF-8", "decoding_routine": "0x004022f0"},
+      {"string": "smtp.yandex.ru", "offset": 0, "encoding": "UTF-8", "decoding_routine": "0x00403100"}
+    ],
+    "stack_strings": [
+      {"string": "aes256-cbc", "offset": 0, "encoding": "UTF-8", "function": "0x004012b0"},
+      {"string": "5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d", "offset": 0, "encoding": "UTF-8", "function": "0x004012b0"},
+      {"string": "password", "offset": 0, "encoding": "UTF-8", "function": "0x00401480"}
+    ],
+    "tight_strings": [
+      {"string": "Authorization: Basic dXNlcjpwYXNzd29yZDEyMw==", "offset": 0, "encoding": "UTF-8"},
+      {"string": "X-API-Key: sk_live_4eC39HqLyjWDarjtT1zdp7dc", "offset": 0, "encoding": "UTF-8"},
+      {"string": "deadbeefcafebabe1234567890abcdef", "offset": 0, "encoding": "UTF-8"}
+    ]
+  }
+}

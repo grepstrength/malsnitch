@@ -5,9 +5,3 @@
 *.dylib
 *.test
 *.out
-not-so-secret
-
-test_*.txt
-test_*.json
-
-*.bin
