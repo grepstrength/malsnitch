@@ -17,7 +17,7 @@ def export_strings(bv):
             "value": string_ref.value,
             "address": hex(string_ref.start),
             "length": string_ref.length,
-            "section": get_section_name(bv.string_ref.start),
+            "section": get_section_name(bv, string_ref.start),
             "xrefs": []
         }
         for xref in bv.get_code_refs(string_ref.start): #asks Binja what code locations reference X address?
