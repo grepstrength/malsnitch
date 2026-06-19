@@ -13,7 +13,7 @@ var version = "0.1.0" //package level variable... currently hardcoded, but I mig
 
 func main() {
 	filePath := flag.String("file", "", "path to input file") //registers a flag called -file, and the three arguments are flag name, default value, ad help text
-	inputType := flag.String("type", "text", "input type: text, floss, or binja")
+	inputType := flag.String("type", "text", "input type: text, floss, binja or memdump")
 	showVersion := flag.Bool("version", false, "print version and exit")
 	outputFormat := flag.String("output", "json", "output format: json or csv")
 	flag.Usage = func() { //overrides the default help output
@@ -24,7 +24,8 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Input types:\n")
 		fmt.Fprintf(os.Stderr, "  text    Plain text strings dump (strings.exe, FLOSS raw output)\n")
 		fmt.Fprintf(os.Stderr, "  floss   FLOSS JSON output (floss -j sample.exe)\n")
-		fmt.Fprintf(os.Stderr, "  binja   Binary Ninja export JSON (bn_export.py)\n\n")
+		fmt.Fprintf(os.Stderr, "  binja   Binary Ninja export JSON (bn_export.py)\n")
+		fmt.Fprintf(os.Stderr, "  memdump Memory dump\n\n")
 		fmt.Fprintf(os.Stderr, "Flags:\n")
 		fmt.Fprintf(os.Stderr, "\nOutput formats:\n")
 		fmt.Fprintf(os.Stderr, "  json   Structured JSON (default)\n")
