@@ -20,7 +20,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "malsnitch v%s\n", version)
 		fmt.Fprintf(os.Stderr, "Malware secrets scanner — extracts embedded credentials, crypto keys, and C2 artifacts\n\n")
 		fmt.Fprintf(os.Stderr, "Usage:\n")
-		fmt.Fprintf(os.Stderr, "  malsnitch -file <path> [-type text|floss|binja]\n\n")
+		fmt.Fprintf(os.Stderr, "  malsnitch -file <path> [-type text|floss|binja|memdump]\n\n")
 		fmt.Fprintf(os.Stderr, "Input types:\n")
 		fmt.Fprintf(os.Stderr, "  text    Plain text strings dump (strings.exe, FLOSS raw output)\n")
 		fmt.Fprintf(os.Stderr, "  floss   FLOSS JSON output (floss -j sample.exe)\n")
