@@ -19,10 +19,6 @@ TO BE CLEAR - this is not another developer secrets scanner. Tools like TruffleH
 
 (Also, I'm proud of myself for not shoehorning in "Go" anywhere in the title.)
 
-#### AI Disclaimer
-
-> **Note:** All code, infrastructure, and technical work here is mine. I used limited AI assistance for help writing this README.
-
 ## Features
 
 - Detects embedded crypto keys (AES-128, AES-256, RC4)
